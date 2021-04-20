@@ -15,24 +15,24 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TestTitle {
     private Logger logger = LogManager.getLogger(TestTitle.class);
-    protected static WebDriver driver;
+    protected WebDriver driver;
     private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
 
     @Before
-    public void StartUp() {
+    public void startUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         logger.info("Драйвер поднят");
     }
 
     @After
-    public void End() {
+    public void end() {
         if (driver != null)
             driver.quit();
     }
 
     @Test
-    public void TestTitle(){
+    public void testTitle(){
         driver.get(cfg.url());
         logger.info("Site OTUS open");
         String lineTitle = driver.getTitle();
