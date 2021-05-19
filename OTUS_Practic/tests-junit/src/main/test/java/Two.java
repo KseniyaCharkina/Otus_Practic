@@ -4,14 +4,10 @@ import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+
 
 import java.util.concurrent.TimeUnit;
 
@@ -49,12 +45,15 @@ public class Two {
     }
 
     private void enterContacts() {
-        driver.findElement(By.xpath("//a[@href='/contacts/']"));
-        //driver.findElement(By.xpath("//a[contains(text(),'Контакты')]")).click();
+        //driver.findElement(By.xpath("//a[@href='/contacts/']")).click();
+
+        try {
+            driver.findElement(By.xpath("//a[contains(text(),'Контакты')]")).click();
+        } catch (StaleElementReferenceException e) {
+            driver.findElement(By.xpath("//a[contains(text(),'Контакты')]")).click();
+        }
         driver.get("https://otus.ru/contacts");
         logger.info("Переход в раздел Контакты");
-
-
 
 
     }
@@ -70,12 +69,9 @@ public class Two {
         auth();
 
         //3.Войти в раздел Контакты
-        //driver.findElement(By.xpath("//a[@href='/contacts/']"));
-        //driver.findElement(By.xpath("//a[contains(text(),'Контакты')]")).click();
-       // logger.info("Переход в раздел Контакты");
         enterContacts();
 
-        Assert.assertEquals("125167, г. Москва, Нарышкинская аллея., д. 5, стр. 2, тел. +7 499 938-92-02",driver.findElement(By.cssSelector("div.c0qfa0-1:nth-child(3) > div:nth-child(2)")).getText());
+        Assert.assertEquals("125167, г. Москва, Нарышкинская аллея., д. 5, стр. 2, тел. +7 499 938-92-02", driver.findElement(By.cssSelector("div.c0qfa0-1:nth-child(3) > div:nth-child(2)")).getText());
         //Assert.assertEquals("125167, г. Москва, Нарышкинская аллея., д. 5, стр. 2, тел. +7 499 938-92-02",driver.findElement(By.xpath("//div[contains(text(),'125167, г. Москва, Нарышкинская аллея., д. 5, стр. 2')]")).getText());
 
 
