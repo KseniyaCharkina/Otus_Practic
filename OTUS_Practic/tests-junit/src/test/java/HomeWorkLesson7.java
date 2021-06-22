@@ -54,7 +54,7 @@ public class HomeWorkLesson7 {
     @Test
     public void testTwo(){
         driver.get("https://msk.tele2.ru/shop/number");
-        driver.findElement(By.id("searchNumber")).sendKeys("97");
+        new WebDriverWait(driver,3).until(ExpectedConditions.elementToBeClickable(By.id("searchNumber"))).sendKeys("97");
         new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("span.phone-number")));
         logger.info("Появилось "+ driver.findElements(By.cssSelector("span.phone-number")).size() +" номера.");
 
