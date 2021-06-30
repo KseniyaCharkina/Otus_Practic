@@ -3,3 +3,16 @@
 2021-04-19 12:15:48,932 INFO TestTitle [main] Драйвер поднят
 2021-04-19 12:15:52,245 INFO TestTitle [main] Site OTUS open
 2021-04-19 12:15:52,250 INFO TestTitle [main] Title good
+2021-06-29 18:03:47,737 INFO c.OtusPersonalInformation [main] Драйвер поднят
+2021-06-29 18:05:16,411 INFO c.OtusPersonalInformation [main] Драйвер поднят
+2021-06-29 18:10:54,092 INFO c.OtusPersonalInformation [main] Драйвер поднят
+2021-06-29 18:16:41,366 INFO c.OtusPersonalInformation [main] Драйвер поднят
+2021-06-29 18:18:31,534 INFO c.OtusPersonalInformation [main] Драйвер поднят
+2021-06-29 18:20:02,590 INFO c.OtusPersonalInformation [main] Драйвер поднят
+2021-06-29 18:23:22,606 INFO c.OtusPersonalInformation [main] Драйвер поднят
+2021-06-29 18:23:27,812 INFO c.OtusPersonalInformation [main] Авторизация прошла успешно
+2021-06-29 18:23:32,329 INFO c.OtusPersonalInformation [main] Переход в личный кабинет
+2021-06-29 18:25:00,452 INFO c.OtusPersonalInformation [main] Драйвер поднят
+2021-06-29 18:25:04,830 INFO c.OtusPersonalInformation [main] Авторизация прошла успешно
+2021-06-29 18:25:09,672 INFO c.OtusPersonalInformation [main] Переход в личный кабинет
+2021-06-29 18:25:13,073 INFO c.OtusPersonalInformation [main] Внесенные изменения сохранены

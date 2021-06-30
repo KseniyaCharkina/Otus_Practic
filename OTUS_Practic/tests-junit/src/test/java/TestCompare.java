@@ -11,15 +11,21 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 public class TestCompare {
-    private Logger logger = LogManager.getLogger(HomeWorkLesson7.class);
-    protected WebDriver driver;
+    private Logger logger = LogManager.getLogger(TestCompare.class);
+    private WebDriver driver;
+    private WebDriverWait wait;
 
     @Before
     public void startUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         logger.info("Драйвер поднят");
+        wait = new WebDriverWait(driver, 20);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
 
     }
 
@@ -32,6 +38,9 @@ public class TestCompare {
 
     @Test
     public void testCompare() {
+
+        String zubr;
+        String makita;
         By buttonPowertools = By.xpath("//a[@title='Электроинструменты']");
         String urlPowertools = "https://www.220-volt.ru/catalog/2-0/";
         By buttonPerforators = By.xpath("//span[contains(text(),'Перфораторы')]");
@@ -54,11 +63,12 @@ public class TestCompare {
         logger.info("Открыт сайт для теста");
 
         driver.findElement(buttonPowertools).click();
-        new WebDriverWait(driver, 20).until(ExpectedConditions.urlToBe(urlPowertools));
+        wait.until(ExpectedConditions.urlToBe(urlPowertools));
         logger.info("Переход в раздел электроинструменты");
 
+
         driver.findElement(buttonPerforators).click();
-        new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOfElementLocated(makitas));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(makitas));
         logger.info("Переход в раздел перфораторы");
 
         //Выборка и сортировка
@@ -70,31 +80,35 @@ public class TestCompare {
 
         driver.findElement(buttonSelection).click();
         logger.info("Подобрать");
-        new WebDriverWait(driver, 20).until(ExpectedConditions.urlToBe(urlSorted));
+        wait.until(ExpectedConditions.urlToBe(urlSorted));
         logger.info("Отсортировали");
 
 
         //Фильтр
-        new WebDriverWait(driver,20).until(ExpectedConditions.elementToBeClickable(filterList)).click();
-        new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOfElementLocated(minPriceFilter)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(filterList)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(minPriceFilter)).click();
         logger.info("Отфильтровали");
 
         //Добавить в сравнения
-        new WebDriverWait(driver,20).until(ExpectedConditions.elementToBeClickable(firstZubr)).click();
-        String zubr = new WebDriverWait(driver,20).until(ExpectedConditions.visibilityOfElementLocated(zubrExpected)).getText();
+        wait.until(ExpectedConditions.elementToBeClickable(firstZubr)).click();
+        zubr = wait.until(ExpectedConditions.visibilityOfElementLocated(zubrExpected)).getText();
+        logger.info("Добавили в сравнение перфоратор ZUBR MAKITA");
 
         driver.findElement(buttonNext).click();
 
         driver.findElement(firstMakita).click();
-        String makita = new WebDriverWait(driver,20).until(ExpectedConditions.visibilityOfElementLocated(makitaExpected)).getText();
+        makita = wait.until(ExpectedConditions.visibilityOfElementLocated(makitaExpected)).getText();
+        logger.info("Добавили в сравнение перфоратор MAKITA");
 
 
         //Переход в раздел сравнений
-        new WebDriverWait(driver,20).until(ExpectedConditions.visibilityOfElementLocated(buttonCompare)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(buttonCompare)).click();
+        logger.info("Переход в раздел сравнений");
 
         //Проверка товара
-        Assert.assertEquals(zubr,driver.findElement(zubrActual).getText());
-        Assert.assertEquals(makita,driver.findElement(makitaActual).getText());
+        Assert.assertEquals(zubr, driver.findElement(zubrActual).getText());
+        Assert.assertEquals(makita, driver.findElement(makitaActual).getText());
+        logger.info("Проверка пройдена");
 
     }
 
