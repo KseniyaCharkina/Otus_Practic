@@ -7,4 +7,10 @@ import org.aeonbits.owner.Config.Sources;
 public interface ServerConfig extends Config {
     @Key("url")
     String url();
+
+    @Key("password")
+    String password();
+
+    @Key("login")
+    String login();
 }
